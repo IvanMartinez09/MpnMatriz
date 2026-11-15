@@ -1,0 +1,138 @@
+/* ================================================================
+   MPN MATRIZ - estilos compartidos (tienda y panel)
+   Idea: negro y blanco de la marca, tipografia ancha en cursiva como el
+   logo, y las esquinas en corchete del logo como marco de las fotos.
+   ================================================================ */
+:root{
+  --bg:#FFFFFF; --surf:#F6F6F4; --surf2:#F1F1EE; --surf3:#E8E8E4;
+  --txt:#0A0A0A; --dim:rgba(10,10,10,.66); --muted:rgba(10,10,10,.47);
+  --line:rgba(10,10,10,.09); --line2:rgba(10,10,10,.17);
+  --acc:#0A0A0A; --acc-h:#2E2E2E; --on-acc:#FFFFFF;   /* negro de la marca para botones y seleccion */
+  --ink:#0A0A0A;
+  --ok:#1F8A4C; --warn:#A86A12; --no:#C8412E;
+  --f:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --r:6px;
+  --safe-b:env(safe-area-inset-bottom,0px); --safe-t:env(safe-area-inset-top,0px);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:auto}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth iframe{pointer-events:none}
+.lenis.lenis-stopped{overflow:hidden}
+body{background:var(--bg);color:var(--txt);font-family:var(--f);font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;font-variant-numeric:tabular-nums}
+[hidden]{display:none!important}
+img{max-width:100%;display:block}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:2px}
+::selection{background:var(--acc);color:var(--on-acc)}
+.wrap{width:100%;max-width:1240px;margin:0 auto;padding:0 20px}
+@media(min-width:900px){.wrap{padding:0 40px}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h1,h2,h3{text-wrap:balance;line-height:1.02}
+
+/* tipografia de marca: ancha y en cursiva, como "SUPLEMENTACION" del logo */
+.disp{font-stretch:125%;font-weight:800;font-style:italic;letter-spacing:-.01em;text-transform:uppercase}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-stretch:112%}
+
+/* ---------- botones ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;
+  border-radius:var(--r);font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;font-stretch:112%;
+  text-decoration:none;white-space:nowrap;transition:background .25s,color .25s,border-color .25s,opacity .25s,transform .25s var(--ease)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-w{background:var(--acc);color:var(--on-acc)}
+.btn-w:hover{background:var(--acc-h)}
+.btn-o{border:1px solid var(--line2);color:var(--txt)}
+.btn-o:hover{border-color:var(--acc)}
+.btn-g{color:var(--dim);min-height:40px;padding:0 12px}
+.btn-g:hover{color:var(--txt)}
+.btn[disabled]{opacity:.38;cursor:not-allowed}
+.btn-wa{background:var(--acc);color:var(--on-acc)}
+.btn-wa:hover{background:var(--acc-h)}
+.btn.cargando{pointer-events:none;opacity:.7}
+.btn.cargando::after{content:"";width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:gira .7s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+
+/* ---------- formularios ---------- */
+.campo{display:grid;gap:6px}
+.campo>span{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.inp{width:100%;min-height:46px;padding:11px 14px;background:var(--surf2);border:1px solid var(--line);border-radius:var(--r);
+  font-size:16px;transition:border-color .2s,background .2s}
+.inp:hover{border-color:var(--line2)}
+.inp:focus{outline:0;border-color:var(--acc);background:#fff}
+.inp::placeholder{color:var(--muted)}
+textarea.inp{min-height:84px;resize:vertical;line-height:1.45}
+select.inp{appearance:none;padding-right:38px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23555' stroke-width='1.6'%3E%3Cpath d='m1 1.5 5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+
+/* chips (filtros, sabores, tamanos) */
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 15px;border:1px solid var(--line2);border-radius:99px;
+  font-size:13px;font-weight:600;color:var(--dim);white-space:nowrap;transition:all .2s;cursor:pointer;background:transparent}
+.chip:hover{color:var(--txt);border-color:rgba(10,10,10,.45)}
+.chip[aria-pressed="true"],.chip.on{background:var(--acc);color:var(--on-acc);border-color:var(--acc)}
+.chip small{font-size:11px;opacity:.6;font-weight:500}
+.chip[disabled]{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+
+/* esquinas en corchete (del logo) */
+.marco{position:relative}
+.marco::before,.marco::after{content:"";position:absolute;width:16px;height:16px;pointer-events:none;z-index:2;
+  border-color:rgba(10,10,10,.5);border-style:solid;transition:all .45s var(--ease)}
+.marco::before{top:10px;left:10px;border-width:2px 0 0 2px}
+.marco::after{bottom:10px;right:10px;border-width:0 2px 2px 0}
+
+/* estado de stock */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 9px;border-radius:99px;background:var(--surf3);color:var(--dim);white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.ok{color:var(--ok)} .pill.warn{color:var(--warn)} .pill.no{color:var(--no)}
+.pill.solo::before{display:none}
+
+/* ---------- paneles laterales y ventanas ---------- */
+.velo{position:fixed;inset:0;background:rgba(10,10,10,.28);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  opacity:0;pointer-events:none;transition:opacity .35s;z-index:60}
+.velo.on{opacity:1;pointer-events:auto}
+.cajon{position:fixed;top:0;right:0;bottom:0;width:min(480px,100%);background:var(--bg);box-shadow:-20px 0 60px rgba(0,0,0,.08);border-left:1px solid var(--line);
+  z-index:61;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .5s var(--ease);
+  padding-top:var(--safe-t)}
+.cajon.on{transform:none}
+.cajon-cab{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.cajon-cuerpo{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.cajon-pie{border-top:1px solid var(--line);padding:16px 20px calc(16px + var(--safe-b));background:var(--bg)}
+.x{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line2);transition:border-color .2s,transform .3s var(--ease)}
+.x:hover{border-color:var(--acc);transform:rotate(90deg)}
+.x svg{width:16px;height:16px}
+
+/* aviso flotante */
+.toast{position:fixed;left:50%;bottom:calc(20px + var(--safe-b));transform:translate(-50%,20px);z-index:90;
+  background:var(--acc);color:var(--on-acc);font-weight:600;font-size:14px;padding:12px 18px;border-radius:var(--r);
+  box-shadow:0 10px 30px rgba(0,0,0,.18);opacity:0;pointer-events:none;transition:all .35s var(--ease);max-width:calc(100% - 32px);text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast.err{background:var(--no);color:#fff}
+
+/* ---------- cursor propio (solo compu) ---------- */
+.cur{display:none}
+html.con-cursor .cur{display:block;position:fixed;left:0;top:0;z-index:200;pointer-events:none}
+html.con-cursor,html.con-cursor a,html.con-cursor button,html.con-cursor label,html.con-cursor .tarjeta,html.con-cursor select{cursor:none}
+html.con-cursor .inp{cursor:text}
+html.con-cursor .cur-a{display:grid;place-items:center}
+.cur-p{width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:#fff;mix-blend-mode:difference}
+.cur-a{width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1px solid rgba(10,10,10,.45);
+  display:grid;place-items:center;transition:width .35s var(--ease),height .35s var(--ease),margin .35s var(--ease),background .35s,border-color .35s}
+.cur-a span{display:block;line-height:1;padding-left:.14em;white-space:nowrap;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--on-acc);opacity:0;transition:opacity .2s;font-stretch:112%}
+.cur-a.link{width:52px;height:52px;margin:-26px 0 0 -26px;border-color:var(--acc)}
+.cur-a.txt{width:74px;height:74px;margin:-37px 0 0 -37px;background:var(--acc);border-color:var(--acc)}
+.cur-a.txt span{opacity:1}
+.cur-a.oculto{opacity:0}
+.cur-p{transition:opacity .2s}.cur-p.oculto{opacity:0}
+
+/* ---------- revelado al hacer scroll ---------- */
+.rv{transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+html.anim .rv:not(.in){opacity:0;transform:translateY(22px)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  html.anim .rv:not(.in){opacity:1;transform:none}
+}
